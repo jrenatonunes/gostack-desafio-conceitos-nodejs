@@ -10,7 +10,7 @@ const repositories = [];
 
 
 app.get("/repositories", (request, response) => {
-  // TODO
+  return response.status(200).json(repositories);
 });
 
 
