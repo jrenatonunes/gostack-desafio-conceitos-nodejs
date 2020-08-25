@@ -23,7 +23,7 @@ app.post("/repositories", (request, response) => {
     return response.status(400).json( { error: 'Bad request: title not provider'});
   }
 
-  // Verifica se o repositorio já está cadatsrado, utilizando a url para comparação
+  // Verifica se o repositorio já está cadastrado, utilizando a url para comparação
   const indexRepository = repositories.findIndex(repository => repository.url === url);
 
   if ( indexRepository > -1 ) {
@@ -39,8 +39,20 @@ app.put("/repositories/:id", (request, response) => {
   // TODO
 });
 
+
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const {id} = request.params;
+
+  // Verifica se o repositório existe
+  const indexRepository = repositories.findIndex(repository => repository.id === id);
+
+  if ( indexRepository < 0 ) {
+    return response.status(400).json({error: 'Repository not found.'})
+  }
+
+  repositories.splice(indexRepository, 1);
+  return response.status(204).send();
+
 });
 
 app.post("/repositories/:id/like", (request, response) => {
