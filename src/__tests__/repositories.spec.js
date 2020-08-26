@@ -22,6 +22,7 @@ describe("Repositories", () => {
     });
   });
 
+  
   it("should be able to list the repositories", async () => {
     const repository = await request(app)
       .post("/repositories")
@@ -45,6 +46,7 @@ describe("Repositories", () => {
       ])
     );
   });
+
 
   it("should be able to update repository", async () => {
     const repository = await request(app)
@@ -76,6 +78,8 @@ describe("Repositories", () => {
     await request(app).put(`/repositories/123`).expect(400);
   });
 
+  
+
   it("should not be able to update repository likes manually", async () => {
     const repository = await request(app)
       .post("/repositories")
@@ -96,6 +100,8 @@ describe("Repositories", () => {
     });
   });
 
+
+
   it("should be able to delete the repository", async () => {
     const response = await request(app)
       .post("/repositories")
@@ -114,7 +120,9 @@ describe("Repositories", () => {
     expect(repository).toBe(undefined);
   });
 
+
   it("should not be able to delete a repository that does not exist", async () => {
     await request(app).delete(`/repositories/123`).expect(400);
   });
+
 });

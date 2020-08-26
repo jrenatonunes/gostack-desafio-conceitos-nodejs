@@ -24,11 +24,11 @@ app.post("/repositories", (request, response) => {
   }
 
   // Verifica se o repositorio já está cadastrado, utilizando a url para comparação
-  const indexRepository = repositories.findIndex(repository => repository.url === url);
+  // const indexRepository = repositories.findIndex(repository => repository.url === url);
 
-  if ( indexRepository > -1 ) {
-    return response.status(400).json({error: 'Repository altready exists'});
-  }
+  // if ( indexRepository > -1 ) {
+  //   return response.status(400).json({error: 'Repository altready exists'});
+  // }
 
   const repository = { id: uuid(), title, url, techs, likes: 0 };
   repositories.push(repository);
@@ -39,9 +39,9 @@ app.post("/repositories", (request, response) => {
 
 app.put("/repositories/:id", (request, response) => {
   const {id } = request.params;
-  const {title, url, techs} = request.body;
+  const {title, url, techs, likes} = request.body;
 
-  if ( !title && !url && !techs) {
+  if ( !title && !url && !techs && !likes) {
     return response.status(400).json({error: 'Bad request: title, url and tecks not povide'});
   }
 
