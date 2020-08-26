@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const {v4} = require("uuid");
+const {uuid} = require("uuidv4");
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.post("/repositories", (request, response) => {
     return response.status(400).json({error: 'Repository altready exists'});
   }
 
-  const repository = { id: v4(), title, url, techs, likes: 0 };
+  const repository = { id: uuid(), title, url, techs, likes: 0 };
   repositories.push(repository);
   return response.status(201).json(repository);
 });
